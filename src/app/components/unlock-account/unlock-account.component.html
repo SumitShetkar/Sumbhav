@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-4 offset-4">
+        <div class="card">
+            <form [formGroup]="unlockAccountForm" (ngSubmit)="onUnlockAccount()">
+                <div class="card-header">
+                    <h5 class="text-center">Unlock Account</h5>
+                </div>
+
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" name="email" formControlName="email"
+                            [ngClass]="{'is-invalid':email.touched && email.errors}"
+                            [ngClass]="{'is-valid':email.touched && !email.errors}">
+                    </div>
+                    <div class="alert alert-danger" [hidden]="email.valid || email.untouched">
+                        There is some problem with email format; email feild is mandatory
+                    </div>
+
+                    <div class="form-group">
+                        <label>Temporary Password</label>
+                        <input type="password" class="form-control" name="tempPassword" formControlName="tempPassword">
+                   </div>
+                   <div class="alert alert-danger" [hidden]="tempPassword.valid || tempPassword.untouched">
+                        Some problem with password feild
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" class="form-control" name="newPassword" formControlName="newPassword" (input)="CheckPassword(newPassword,confirmPassword)">
+                   </div>
+                   <div class="alert alert-danger" [hidden]="newPassword.valid || newPassword.untouched">
+                        Some problem with password feild
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="confirmPassword" class="form-control" name="confirmPassword" (input)="CheckPassword(newPassword,confirmPassword)" formControlName="confirmPassword">
+                   </div>
+                   <div class="alert alert-danger" [hidden]="!showmessge || confirmPassword.untouched">
+                            New password and confirm password should exctly match
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-2">
+                            <button type="submit" [disabled]="unlockAccountForm.invalid"
+                                class="btn btn-success">Register</button>
+                        </div>
+                        <div class="col-2">
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
